@@ -1,37 +1,78 @@
-## Welcome to GitHub Pages
+# AntiProfanity.API
+Detect content is profane.
 
-You can use the [editor on GitHub](https://github.com/profanity-checker/profanity-checker.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+**URL** : `/api/profanity_detection/`
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+**Method** : `POST`
 
-### Markdown
+**Auth required** : YES
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Success Response
 
-```markdown
-Syntax highlighted code block
+**Code** : `200 OK`
 
-# Header 1
-## Header 2
-### Header 3
+**Content examples**
 
-- Bulleted
-- List
+For positive profanity detection
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```json
+{
+"status": "success",
+"isProfanity": true
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+For negative profanity detection
 
-### Jekyll Themes
+```json
+{
+   "status": "success",
+   "isProfanity": false
+}
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/profanity-checker/profanity-checker.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+For bad Request
 
-### Support or Contact
+```json
+{
+"status": "error",
+"code": 400,
+"message": "Bad Request: Missing required parameters/Request content type is not allowed."
+}
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+For Maximum content length exceeded
+
+```json
+{
+"status": "error",
+"code": 1001,
+"message": "Maximum allowed length of the input text is 100."
+}
+```
+For minimum allowed length
+```json
+{
+"status": "error",
+"code": 1002,
+"message": "Minimum allowed length of the input text is 2."
+}
+```
+For empty content
+```json
+{
+"status": "error",
+"code": 1002,
+"message": "Minimum allowed length of the input text is 2."
+}
+```
+For Unexpected error
+```json
+{
+"status": "error",
+"code": 1004,
+"message": "Unexpected error occurred."
+}
+```
+
+
